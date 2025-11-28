@@ -1,48 +1,44 @@
 # Lb1_DeepLearning_PyTorch
-1. Introduction
+     1. Introduction
 
 The objective of this laboratory session is to explore the use of PyTorch to build, train, evaluate, and optimize deep neural networks for:
 
-Regression using the NYSE stock prices dataset
-
-Multiclass classification using the Predictive Maintenance dataset
+ -Regression using the NYSE stock prices dataset
+ -Multiclass classification using the Predictive Maintenance dataset
 
 Throughout the lab, the work included:
 
-Exploratory Data Analysis (EDA)
+ ->Exploratory Data Analysis (EDA)
 
-Data preprocessing and normalization
+ ->Data preprocessing and normalization
 
-Implementation of MLP architectures in PyTorch
+ ->Implementation of MLP architectures in PyTorch
 
-Training and testing neural networks
+ ->Training and testing neural networks
 
-Hyperparameter tuning using GridSearchCV
+ ->Hyperparameter tuning using GridSearchCV
 
-Regularization (Dropout & Weight Decay)
+ ->Regularization (Dropout & Weight Decay)
 
-Performance evaluation using loss curves, accuracy curves, and metrics
+ ->Performance evaluation using loss curves, accuracy curves, and metrics
 
-Oversampling imbalanced data using SMOTE
+ ->Oversampling imbalanced data using SMOTE
 
-Interpretation and comparison of results
+ ->Interpretation and comparison of results
 
 2. Part 1 – Regression (NYSE Stock Prices)
 2.1 Dataset & EDA
 
 The NYSE dataset contains 851,264 rows with 7 columns. For regression, only numerical columns were kept:
 
-Features: open, high, low, volume
-
-Target: close
+  -Features: open, high, low, volume
+  -Target: close
 
 Key EDA Findings:
 
-Price variables (open, close, high, low) are perfectly correlated (~1.0)
-
-volume has very weak correlation with prices (~–0.06)
-
-The target variable is highly skewed, with most prices concentrated under 200
+  -Price variables (open, close, high, low) are perfectly correlated (~1.0)
+  -volume has very weak correlation with prices (~–0.06)
+  -The target variable is highly skewed, with most prices concentrated under 200
 
 This indicates a highly collinear and noisy dataset, making regression difficult.
 
@@ -65,13 +61,11 @@ Epoch	Train Loss	Test Loss
 50	≈11390	≈11320
 Loss Curve Observations
 
-Train & test losses decrease smoothly
+  -Train & test losses decrease smoothly
+  -Test loss remains slightly below train loss → no overfitting
+  -Regression loss remains high due to noisy and correlated features
 
-Test loss remains slightly below train loss → no overfitting
-
-Regression loss remains high due to noisy and correlated features
-
- Conclusion:
+ *Conclusion:
 The model learns stable relationships, but the dataset’s structure limits predictive performance.
 
 2.4 Hyperparameter Tuning (GridSearchCV)
@@ -107,11 +101,9 @@ Regularization improves generalization but cannot drastically reduce loss due to
 
 The dataset includes machine conditions with 6 failure types:
 
-Extreme imbalance: class 1 dominates (~9500 samples)
-
-Other classes have <200 samples
-
-Mechanical features (rotational speed, torque, tool wear) show strongest correlation with failure type
+  -Extreme imbalance: class 1 dominates (~9500 samples)
+  -Other classes have <200 samples
+  -Mechanical features (rotational speed, torque, tool wear) show strongest correlation with failure type
 
  Conclusion:
 Class imbalance required correction for any reliable learning.
@@ -141,15 +133,12 @@ Epoch	Train Acc	Test Acc
 50	0.78	0.78
 Accuracy & Loss Curve Observations
 
-Train & test curves almost identical
+  -Train & test curves almost identical
+  -No overfitting
+  -Accuracy reaches 78%, excellent for 6 balanced classes
+  -Loss decreases smoothly and consistently
 
-No overfitting
-
-Accuracy reaches 78%, excellent for 6 balanced classes
-
-Loss decreases smoothly and consistently
-
- Conclusion:
+ *Conclusion:
 SMOTE + MLP achieved high and stable performance.
 
 3.5 Confusion Matrix & Classification Report
